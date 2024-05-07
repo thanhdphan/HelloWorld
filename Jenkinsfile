@@ -6,6 +6,7 @@ pipeline {
         }
     }
 
+	stages {
         stage('Checkout') {
             steps {
                     git 'https://github.com/thanhdphan/HelloWorld.git'
@@ -22,5 +23,5 @@ pipeline {
 
             }
         }
-  
+  }
 }
