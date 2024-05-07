@@ -6,62 +6,20 @@ pipeline {
         }
     }
 
-    options {
-        buildDiscarder logRotator( 
-                    daysToKeepStr: '16', 
-                    numToKeepStr: '10'
-            )
-    }
-
-    stages {
-        
-        stage('Cleanup Workspace') {
+        stage('Checkout') {
             steps {
-                cleanWs()
-                sh """
-                echo "Cleaned Up Workspace For Project"
-                """
+                    git 'https://github.com/thanhdphan/HelloWorld.git'
+
             }
         }
 
-        stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '*/main']], 
-                    userRemoteConfigs: [[url: 'https://github.com/thanhdphan/HelloWorld.git']]
-                ])
-            }
-        }
-
-        stage(' Unit Testing') {
-            steps {
-                sh """
-                echo "Running Unit Tests"
-                """
-            }
-        }
-
-        stage('Code Analysis') {
-            steps {
-                sh """
-                echo "Running Code Analysis"
-                """
-            }
-        }
-
-        stage('Build Deploy Code') {
+        stage('Build') {
             when {
                 branch 'develop'
             }
             steps {
-                sh """
-                echo "Building Artifact"
-                """
+                   bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\MSBuild.exe" /t:Rebuild /p:Configuration=Debug HelloWorld.sln'
 
-                sh """
-                echo "Deploying Code"
-                """
             }
         }
 
