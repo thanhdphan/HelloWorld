@@ -1,7 +1,7 @@
 ﻿Module Module1
 
     Sub Main()
-        'testfsdfsdf
+        MsgBox("Hello World!")
     End Sub
 
 End Module
