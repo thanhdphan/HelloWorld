@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
 
             steps {
-                   bat 'MSBuild.exe /t:Rebuild /p:Configuration=Debug HelloWorld.sln'
+                   bat '"C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" /t:Rebuild /p:Configuration=Debug HelloWorld.sln'
 
             }
         }
